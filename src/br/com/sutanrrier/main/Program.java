@@ -12,14 +12,12 @@ public class Program {
 	public static void main(String[] args) {
 		//Os comandos "sc.nextLine()" servem para consumir a quebra de linha gerada pelo nextInt();
 		
-		int quantidade_funcionarios;
 		List<Funcionario> funcionarios = new ArrayList<>();
-		
 		Scanner sc = new Scanner(System.in);
 		Locale.setDefault(Locale.US);
 		
 		System.out.print("Quantos funcionários serão registrados: ");
-		quantidade_funcionarios = sc.nextInt();
+		int quantidade_funcionarios = sc.nextInt();
 		sc.nextLine(); 
 		
 		//Criação dos Funcionários
@@ -39,11 +37,18 @@ public class Program {
 		//Buscar funcionário para aumento
 		System.out.print("\nDigite o id do empregado que terá o aumento de salário: ");
 		int id_empregado = sc.nextInt();
+		int fails_busca = 0;
 		for(Funcionario funcionario : funcionarios) {
 			if(funcionario.getId() == id_empregado) {
 				System.out.print("Informe a porcentagem de aumento: ");
 				double porcentagem_aumento = sc.nextDouble();
 				funcionario.aumentoSalario(porcentagem_aumento);
+			}
+			else {
+				fails_busca++;
+				if(fails_busca == quantidade_funcionarios) {
+					System.out.println("Este id de funcionário não existe!");
+				}
 			}
 		}
 		
